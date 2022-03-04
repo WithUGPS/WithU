@@ -1,22 +1,32 @@
 <html>
 	<head>
-        <title> 404 </title>
-        <meta charset="utf-8"/>
-    </head>
+      <title> 404 </title>
+      <meta charset="utf-8"/>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  </head>
     <body style="background: linear-gradient(to bottom, #72bcd4, white 10em); background-repeat: no-repeat;">
-		<table>
+      <div class="container">
+        <table class="table">
             <tr>
-              <td>ID</td>
-              <td>Nombre</td>
-              <td>Apellidos</td>
+              <td class="table-info">ID</td>
+              <td class="table-danger">Nombre</td>
+              <td class="table-Warning">Apellidos</td>
             </tr>
           <% users.forEach(function(u){ %>
             <tr>
-              <td><%= u.ID %></td>
-              <td><%= u.Nombre %></td>
-              <td><%= u.Apellidos %></td>
+              <td><%= u.id %></td>
+              <td><%= u.nombre %></td>
+              <td><%= u.apellidos %></td>
             </tr>
           <% }); %>
         </table>
+        <div>
+          <form method="POST" action="anadirPersona">
+              <input type="text" placeholder="Nombre" name="persona[nombre]">
+              <input type="text" placeholder="Apellidos" name="persona[apellidos]">
+              <input type="submit" class="btn btn-primary" value = "Enviar">
+          </form>
+        </div>
+      </div>
     </body>
 </html>
