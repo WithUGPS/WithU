@@ -8,3 +8,9 @@ body{
 	width: 100%;
 	background-color: black;
 }
+
+.rojo{
+	height:20px;
+	width: 20%;
+	background-color: red;
+}
