@@ -1,15 +1,14 @@
 "use strict";
 
-const fs = require('fs');
+//const fs = require('fs');
 const DAOPersonas = require('./public/javascripts/daoPersonas')
-//Require de librerías externas
+
 const path = require("path");
 const express = require("express");
 const app = express();
 
-const bodyParser = require("body-parser");
-const { user } = require('../AWFinal/config');
-/*
+//const bodyParser = require("body-parser");
+
 const config = require("./config");
 
 const mysql = require("mysql");
@@ -19,41 +18,35 @@ const pool = mysql.createPool({
 	password: config.password,
 	database: config.database
 });
-*/
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use(bodyParser.urlencoded({ extended: true }));
-let usuarios = [];
-let id = 1;
+//app.use(bodyParser.urlencoded({ extended: true }));
 
-function cb_getAll(err, result){
+//let usuarios = [];
+//let id = 1;
+
+function cb_getAll(err, us){
 	if(err){
 		console.log(err);
-		res.render("start", {users: usuarios});
+		res.redirect("start");
 	}
 	else{
-		usuarios = result;
-		res.render("start", {users: usuarios});
+		res.render("start", {users: us});
 	}
 }
 
-function middle1(req, res, next) {
-	console.log(usuarios)
-	console.log(usuarios.length);
-    if(usuarios.length >= 4){
-		res.render("start", {users: usuarios});
-	} else {
-		next();
+function cb_addPersona(err, usuario){
+	if(err){
+		console.log(err);
+		res.redirect("start");
 	}
-}
-
-function middle2(req, res, next) {
-    if(req.body.persona.nombre === "Adrian" && req.body.persona.apellidos === "Prieto"){
-		req.body.persona = {nombre: "Ese", apellidos: "Tonto que os está explicando"};
+	else{
+		let dao = DAOPersonas(pool);
+		dao.getPersonas(cb_getAll);
 	}
-	next();
 }
 
 app.get("/", function(request, response){
@@ -61,19 +54,14 @@ app.get("/", function(request, response){
 });
 
 app.get("/start", function(req,res){
-	//let dao = new DAOPersonas(pool);
-	//dao.getAll(cb_getAll);
-	res.render("start", {users: usuarios});
+	let daoP = new DAOPersonas(pool);
+	daoP.getAll(cb_getAll);
 });
 
-app.post("/anadirPersona", [middle1, middle2], function(req, res){
+app.post("/anadirPersona", function(req, res){
 	let persona = req.body.persona;
-	persona.id = id;
-	id++;
-	usuarios.push(persona);
-	res.redirect("start");
-	//let dao = new DAOPersonas(pool);
-	//dao.anadirPersona(cb_getAll, persona);
+	let dao = new DAOPersonas(pool);
+	dao.addPersona(persona, cb_addPersona);
 });
 
 app.get("*", function(req,res){

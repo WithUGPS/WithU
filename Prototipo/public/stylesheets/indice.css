@@ -1,0 +1,10 @@
+body{
+	background: linear-gradient(to bottom, #72bcd4, white 10em); 
+	background-repeat: no-repeat;
+}
+
+.negro{
+	height: 50px;
+	width: 100%;
+	background-color: black;
+}

@@ -4,18 +4,40 @@ class DAOPersonas {
 	constructor(pool) {
 		this._pool = pool;
 	}
-	
-	getAll(callback) {
-		this._pool.getConnection(function(err, connection) {
+
+	addPersona(persona, callback){
+		this._pool.getConnection(function(err, con) {
 			if (err) {
-				callback("Error de acceso a la BD");
+				callback("No se ha podido acceder a la base de datos");
 			}
 			else {
-				connection.query("SELECT * " +
+				con.query("INSERT INTO Persona(Nombre, Apellido) VALUES (?, ?)" , [persona.nombre, persona.apellidos],
+					function(err, rows) {
+						con.release();
+						if (err) {
+                            callback("Error con la Query");
+						}
+						else {
+                            persona.id = result.insertId;
+							callback(null, persona);
+						}
+					}
+				);
+			}
+		});
+	}
+
+	getPersonas(callback) {
+		this._pool.getConnection(function(err, con) {
+			if (err) {
+				callback("No se ha podido acceder a la base de datos");
+			}
+			else {
+				con.query("SELECT * " +
 								 "FROM Persona p" +
 								 "ORDER BY p.id" ,
 					function(err, rows) {
-						connection.release(); // devolver al pool la conexión
+						con.release();
 						if (err) {
                             callback("Error con la Query");
 						}
@@ -37,4 +59,5 @@ class DAOPersonas {
 		});
 	}
 }
+
 module.exports = DAOPersonas;
