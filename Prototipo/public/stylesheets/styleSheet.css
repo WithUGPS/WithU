@@ -1,0 +1,132 @@
+.preglin{
+	margin-top: 15px;
+}
+.nameuser{
+	text-align: center;
+	color: blue;
+	font-weight: 600;
+}
+.cajapregunta{
+	border-radius: 20px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+.titulopreg{
+	color: blue;
+	font-weight: 700;
+}
+.contpreg{
+	color: #000000;
+	font-weight: 200;
+	font-size: 13px;
+}
+.preg{
+margin-top: 25px;
+}.formular{
+	margin-top: 20px;
+}
+.heightbuscar{
+	height: 5em;
+	display: table;
+}
+.heightpreguntas1{
+	max-height: 5em;
+}
+.heightpreguntas{
+	height: 15em;
+}
+.heightbuscar2{
+	width: 500px;
+	height: 5em;
+}
+.tds-preguntas{
+    margin-top: 1%;
+}
+.etiqueta{
+	font-size: 9px;
+	text-align: center;
+	background-color: lightblue;
+	color: blue;
+	width: 50px;
+	height: 30px;
+}
+.buscar{
+    text-align: center;
+}
+.height1{
+	height: 10em;
+	margin: auto;
+	text-align: center;
+}
+.site-name {
+	text-align: center;
+	position: center;
+	display: block;
+	font-weight: 800;
+	font-size: 120px;
+	color:#FFFFFF;
+	text-shadow: 5px 5px #000000;
+	
+}
+
+.barizquierda{
+	text-align: left;
+	vertical-align: left;
+	margin: auto;
+	width: 50px;
+}
+
+.barderecha{
+	text-align: right;
+	vertical-align: right;
+	margin: auto;
+	width: 50px;
+}
+
+.separa{
+	width: 150px;
+	margin-left: 50%;
+	margin-bottom: 10px;
+	margin-left: 0px;
+}
+.userpic{
+	border-radius: 100%;
+	width: 100px;
+	height: 100px;
+}
+.userpic2{
+	border-radius: 100%;
+	width: 50px;
+	height: 50px;
+}
+.botones{
+	width: 30%;
+	margin-right: 70%;
+}
+.user-name{
+	font-weight: bolder;
+	text-align: center;
+	font-size: 100%;
+}
+.table-user{
+    width: auto;
+    margin-right: 0px;
+    margin-left: auto;
+	text-align: left;
+	margin-right: 0px;
+}
+.frm-pregunta{
+font-weight:bold;
+font-size:x-large;
+}
+.titulo{
+    margin-top: 2em;
+    font-weight: bold;
+}
+.subtitulo{
+	font-size: small;
+}
+.publicar{
+    margin-top: 15px;
+}

@@ -1,0 +1,22 @@
+<html>
+	<head>
+        <title> 404 </title>
+        <meta charset="utf-8"/>
+    </head>
+    <body style="background: linear-gradient(to bottom, #72bcd4, white 10em); background-repeat: no-repeat;">
+		<table>
+            <tr>
+              <td>ID</td>
+              <td>Nombre</td>
+              <td>Apellidos</td>
+            </tr>
+          <% users.forEach(function(u){ %>
+            <tr>
+              <td><%= u.ID %></td>
+              <td><%= u.Nombre %></td>
+              <td><%= u.Apellidos %></td>
+            </tr>
+          <% }); %>
+        </table>
+    </body>
+</html>
