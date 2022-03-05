@@ -29,40 +29,44 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-function cb_getAll(err, us){
-	if(err){
-		console.log(err);
-		res.redirect("start");
-	}
-	else{
-		res.render("start", {users: us});
-	}
-}
-
-function cb_addPersona(err, usuario){
-	if(err){
-		console.log(err);
-		res.redirect("start");
-	}
-	else{
-		let dao = DAOPersonas(pool);
-		dao.getPersonas(cb_getAll);
-	}
-}
-
 app.get("/", function(request, response){
 	response.redirect("/start");
 });
 
 app.get("/start", function(req,res){
 	let daoP = new DAOPersonas(pool);
-	daoP.getPersonas(cb_getAll);
+	daoP.getPersonas(function (err, us){
+		if(err){
+			console.log(err);
+			res.redirect("start");
+		}
+		else{
+			res.render("start", {users: us});
+		}
+	});
 });
 
-app.post("/anadirPersona", [middle1, middle2], function(req, res){
+app.post("/anadirPersona", function(req, res){
 	let dao = new DAOPersonas(pool);
 	let persona = req.body.persona;
-	dao.addPersona(persona, cb_addPersona);
+	dao.addPersona(persona, function (err, usuario){
+		if(err){
+			console.log(err);
+			res.redirect("start");
+		}
+		else{
+			let dao = DAOPersonas(pool);
+			dao.getPersonas(function (err, us){
+				if(err){
+					console.log(err);
+					res.redirect("start");
+				}
+				else{
+					res.render("start", {users: us});
+				}
+			});
+		}
+	});
 });
 
 app.get("*", function(req,res){
