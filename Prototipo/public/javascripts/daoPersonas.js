@@ -11,8 +11,8 @@ class DAOPersonas {
 				callback("No se ha podido acceder a la base de datos");
 			}
 			else {
-				con.query("INSERT INTO Persona(Nombre, Apellido) VALUES (?, ?)" , [persona.nombre, persona.apellidos],
-					function(err, rows) {
+				con.query("INSERT INTO Persona(Nombre, Apellidos) VALUES (?, ?)" , [persona.nombre, persona.apellidos],
+					function(err, result) {
 						con.release();
 						if (err) {
                             callback("Error con la Query");
@@ -35,19 +35,19 @@ class DAOPersonas {
 			else {
 				con.query("SELECT * " +
 								 "FROM Persona p" +
-								 "ORDER BY p.id" ,
+								 " ORDER BY p.id" ,
 					function(err, rows) {
 						con.release();
 						if (err) {
-                            callback("Error con la Query");
+                            callback("Error con la Query en leer");
 						}
 						else {
                             let personas = Array.from(new Set(
                                 rows.map(t => t.id))).map(id => {
                                     return {
                                         id: id,
-                                        nombre: rows.find(t => t.id === id).nombre,
-                                        apellidos: rows.find(t => t.id === id).apellidos
+                                        Nombre: rows.find(t => t.id === id).Nombre,
+                                        Apellidos: rows.find(t => t.id === id).Apellidos
                                     }
                                 }
                             );

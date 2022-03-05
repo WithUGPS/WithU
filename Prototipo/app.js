@@ -55,7 +55,7 @@ app.post("/anadirPersona", function(req, res){
 			res.redirect("start");
 		}
 		else{
-			let dao = DAOPersonas(pool);
+			let dao = new DAOPersonas(pool);
 			dao.getPersonas(function (err, us){
 				if(err){
 					console.log(err);
