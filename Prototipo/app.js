@@ -1,6 +1,5 @@
 "use strict";
 
-const DAOPersonas = require('./public/javascripts/daoPersonas')
 const path = require("path");
 const express = require("express");
 const app = express();
@@ -8,6 +7,13 @@ const multer = require("multer");
 const bodyParser = require('body-parser');
 const config = require("./config");
 const mysql = require("mysql");
+
+const http = require("http");
+const hostname = '0.0.0.0';
+const port = 3000;
+const fs = require("fs");
+
+const DAOPersonas = require('./public/javascripts/daoPersonas')
 
 const pool = mysql.createPool({
 	host: config.host,
@@ -61,6 +67,12 @@ app.post("/anadirPersona", [middle1, middle2], function(req, res){
 
 app.get("*", function(req,res){
 	res.render("error", { error: "404" });
+});
+
+const server = http.createServer((req,res) => {
+	res.statusCode = 200;
+	res.setHeader("Content-Type", "text/plain");
+	res.end("Hello World!\n");
 });
 
 app.listen(3000, () => {
