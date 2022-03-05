@@ -2,7 +2,7 @@
 
 module.exports = {
 	host: "localhost",
-	user: "root",
-	password: "",
-	database: "aw_final"
+	user: "withuroot",
+	password: "withugps2022",
+	database: "withu"
 }
